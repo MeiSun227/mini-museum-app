@@ -1,21 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import {createSharedElementStackNavigator} from "react-navigation-shared-element"
+import AuthNavigation from './src/navigator/AuthNavigation';
+import EgyptianArtItem from './src/components/EgyptianArtItem'
+import Detail from './src/components/Detail'
+
+
+const Stack = createSharedElementStackNavigator()
+const App = () => {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+    <NavigationContainer>
+      <Stack.Navigator  screenOptions={{
+          headerShown: false,
+        }} >
+      <Stack.Screen name="Collection" component={EgyptianArtItem}/>
+      <Stack.Screen name="Detail" component={Detail}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+    // <AuthNavigation/>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
