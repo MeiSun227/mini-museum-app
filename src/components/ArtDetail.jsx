@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
-  FlatList,
-  Text,
   Image,
   SafeAreaView,
+  Text,
+  Pressable,
+  TouchableHighlight,
 } from "react-native";
 import { SharedElement } from "react-navigation-shared-element";
 import { AntDesign } from "@expo/vector-icons";
 
-const Detail = ({ route, navigation }) => {
+const ArtDetail = ({ route, navigation }) => {
   const { item } = route.params;
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <AntDesign
@@ -21,6 +23,7 @@ const Detail = ({ route, navigation }) => {
         style={{ top: 10, zIndex: 2 }}
         onPress={navigation.goBack}
       />
+
       <SharedElement
         id={`item.${item.key}.photo`}
         style={[StyleSheet.absoluteFillObject]}
@@ -31,13 +34,11 @@ const Detail = ({ route, navigation }) => {
             source={{ uri: item.primaryImage }}
           />
         </View>
+        <View style={{ margin: 12, padding: 10 }}>
+          <Text style={styles.textFont}>{item.title}</Text>
+          <Text style={styles.textDetail}>{item.dimensions}</Text>
+        </View>
       </SharedElement>
-
-      <Text style={styles.textFont}>{item.title}</Text>
-
-      <View style={styles.carousel}>
-        <Text>heloo</Text>
-      </View>
     </SafeAreaView>
   );
 };
@@ -70,9 +71,15 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 120,
   },
+  textDetail: {
+    fontSize: 14,
+    fontWeight: "200",
+    color: "white",
+    top: 150,
+  },
 });
 
-Detail.sharedElements = (route, otherRoute, showing) => {
+ArtDetail.sharedElements = (route, otherRoute, showing) => {
   const { item } = route.params;
   return [
     {
@@ -83,4 +90,4 @@ Detail.sharedElements = (route, otherRoute, showing) => {
     },
   ];
 };
-export default Detail;
+export default ArtDetail;

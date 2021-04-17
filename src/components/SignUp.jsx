@@ -17,7 +17,7 @@ const SignUp = ({ navigation }) => {
     db.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        navigation.navigate("Home");
+        navigation.navigate("Main");
       })
       .catch((error) => console.log(error));
   };

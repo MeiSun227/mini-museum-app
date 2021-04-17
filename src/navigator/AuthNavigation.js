@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import OnBoardingScreen from "../components/OnBoardingScreen";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
-import EgyptianArtItem from "../components/EgyptianArtItem";
+import SharedElementNavigation from "./SharedElementNavigation";
 
 const AuthStack = createStackNavigator();
 
@@ -19,7 +19,7 @@ const AuthNavigation = () => {
         <AuthStack.Screen name="onBoarding" component={OnBoardingScreen} />
         <AuthStack.Screen name="SignIn" component={SignIn} />
         <AuthStack.Screen name="SignUp" component={SignUp} />
-        <AuthStack.Screen name="Home" component={EgyptianArtItem} />
+        <AuthStack.Screen name="Main" component={SharedElementNavigation} />
       </AuthStack.Navigator>
     </NavigationContainer>
   );

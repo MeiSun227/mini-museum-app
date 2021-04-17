@@ -5,18 +5,18 @@ import {
   FlatList,
   Text,
   Image,
-  Button,
   Dimensions,
   TouchableOpacity,
   Animated,
 } from "react-native";
 import useEgyptianArtApi from "../hooks/useEgyptianArtApi";
 import { SharedElement } from "react-navigation-shared-element";
+import { AntDesign } from "@expo/vector-icons";
 
 const { height, width } = Dimensions.get("screen");
 const OVERFLOWITEM = 70;
-const ITEM_WIDTH = width * 0.7;
-const ITEM_HEIGHT = height * 0.6;
+const ITEM_WIDTH = width * 0.8;
+const ITEM_HEIGHT = height * 0.5;
 const FULL_SIZE = ITEM_WIDTH * 2;
 
 const HomeScreen = ({ navigation }) => {
@@ -27,9 +27,17 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <AntDesign
+        name="arrowleft"
+        size={32}
+        color="#fff"
+        style={{ top: 30, left: 10, zIndex: 2 }}
+        onPress={navigation.goBack}
+      />
       <View style={{ padding: 10, top: 50 }}>
         <Text style={styles.textHeader}>Egyptian Art</Text>
       </View>
+      
       <FlatList
         data={art}
         keyExtractor={(item) => item.title}
@@ -131,6 +139,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 40,
     textAlign: "center",
+    bottom: 8,
   },
 });
 
