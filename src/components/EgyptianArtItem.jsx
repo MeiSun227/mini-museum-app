@@ -7,17 +7,14 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  Animated,
 } from "react-native";
 import useEgyptianArtApi from "../hooks/useEgyptianArtApi";
 import { SharedElement } from "react-navigation-shared-element";
 import { AntDesign } from "@expo/vector-icons";
 
 const { height, width } = Dimensions.get("screen");
-const OVERFLOWITEM = 70;
 const ITEM_WIDTH = width * 0.8;
 const ITEM_HEIGHT = height * 0.5;
-const FULL_SIZE = ITEM_WIDTH * 2;
 
 const HomeScreen = ({ navigation }) => {
   const { artObjects } = useEgyptianArtApi();
@@ -37,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
       <View style={{ padding: 10, top: 50 }}>
         <Text style={styles.textHeader}>Egyptian Art</Text>
       </View>
-      
+
       <FlatList
         data={art}
         keyExtractor={(item) => item.title}
