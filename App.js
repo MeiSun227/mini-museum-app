@@ -5,8 +5,7 @@ import CommentsList from "./src/components/CommentsList";
 
 const App = () => {
 
-  return <CommentsList />;
-  // return <AuthNavigation />;
+  return <AuthNavigation />;
 };
 
 export default App;

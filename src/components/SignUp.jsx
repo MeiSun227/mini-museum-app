@@ -7,8 +7,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import db from "../database/Firebase";
+import "firebase/firestore";
 
 const SignUp = ({ navigation }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,12 +19,23 @@ const SignUp = ({ navigation }) => {
     db.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
+        db.firestore().collection("users").doc(db.auth().currentUser.uid).set({
+          name,
+          email,
+        });
+        console.log(uid);
         navigation.navigate("Main");
       })
       .catch((error) => console.log(error));
   };
   return (
     <View style={styles.container}>
+      <TextInput
+        style={styles.inputStyle}
+        placeholder="name"
+        value={name}
+        onChangeText={setName}
+      />
       <TextInput
         style={styles.inputStyle}
         placeholder="email"

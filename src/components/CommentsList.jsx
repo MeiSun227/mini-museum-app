@@ -1,25 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   FlatList,
   View,
   Text,
-  SafeAreaView,
   TextInput,
   Button,
 } from "react-native";
 
+import db from "../database/Firebase";
+
 const CommentsList = () => {
   const [text, setText] = useState("");
-  const [comments, setComments] = useState([
-    { comment: "I like it a lot, will like to see in the musuem", id: 1 },
-    { comment: "Great art", id: 2 },
-  ]);
+  const [comments, setComments] = useState([]);
+
+  const saveComment = () => {
+    db.database()
+      .ref("comments/")
+      .push({ comment: text });
+  };
+
+  useEffect(() => {
+    db.database()
+      .ref("comments/")
+      .on("value", (snapshot) => {
+        const data = snapshot.val();
+        console.log(data)
+        if (data) {
+            console.log("data")
+            const cs = Object.values(data).map(c => {
+                return {"comment": c}
+            })
+            console.log(cs)
+            setComments(cs)
+        } else {
+            setComments([])
+        }
+      });
+  }, []);
 
   const submitComment = (text) => {
-    setComments([...comments, { comment: text, id: Math.random().toString() }]);
+    setComments([...comments, { saveComment }]);
     setText("");
   };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -35,7 +59,7 @@ const CommentsList = () => {
       ></Button>
       <FlatList
         data={comments}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.comment}
         renderItem={({ item }) => {
           return (
             <View style={styles.item}>

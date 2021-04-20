@@ -16,7 +16,7 @@ const SignIn = ({ navigation }) => {
   const handleLoginUser = () => {
     db.auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((userCredential) => {
         navigation.navigate("Main");
       })
       .catch((error) => console.log(error));
