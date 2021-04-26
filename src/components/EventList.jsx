@@ -15,12 +15,23 @@ const ITEM_HEIGHT = height * 0.2;
 const EventList = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textHeader}> Art Event </Text>
-      <View style={{ margin: 12, flex: 0.7, padding: 5 }}>
+      <Text
+        style={{
+          fontSize: 24,
+          fontWeight: "600",
+          fontFamily: "Cochin",
+          color: "white",
+          textAlign: "left",
+        }}
+      >
+        Mini
+      </Text>
+      <Text style={styles.textHeader}> Art collections </Text>
+      <View style={{ margin: 12, padding: 5 }}>
         <View style={styles.border}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Collection");
+              navigation.navigate("EgyptianCollection");
             }}
           >
             <View style={styles.carousel}>
@@ -35,7 +46,7 @@ const EventList = ({ navigation }) => {
         <View style={styles.border}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Collection");
+              navigation.navigate("SongCollection");
             }}
           >
             <View style={styles.carousel}>
@@ -43,7 +54,27 @@ const EventList = ({ navigation }) => {
                 source={require("../images/899.jpg")}
                 style={styles.image}
               />
-              <Text style={styles.textBody}>Chinese Art Collection</Text>
+              <Text style={styles.textBody}>
+                Chinese-Song Dynasty Collection
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.border}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("SongCollection");
+            }}
+          >
+            <View style={styles.carousel}>
+              <Image
+                source={{
+                  uri:
+                    "https://images.metmuseum.org/CRDImages/as/original/DT240.jpg",
+                }}
+                style={styles.image}
+              />
+              <Text style={styles.textBody}>India Art Collection</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -98,7 +129,6 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     resizeMode: "cover",
     opacity: 0.7,
-    bottom: 120,
   },
 });
 

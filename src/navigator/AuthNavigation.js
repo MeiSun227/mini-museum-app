@@ -7,6 +7,7 @@ import SignUp from "../components/SignUp";
 import SharedElementNavigation from "./SharedElementNavigation";
 import db from "../database/Firebase";
 
+
 const AuthStack = createStackNavigator();
 
 const AuthNavigation = () => {
@@ -23,7 +24,8 @@ const AuthNavigation = () => {
 
   return (
     <NavigationContainer>
-      {loading ? (<AuthStack.Navigator
+      {loading ? (
+        <AuthStack.Navigator
           screenOptions={{
             headerShown: false,
           }}
@@ -32,8 +34,9 @@ const AuthNavigation = () => {
           <AuthStack.Screen name="SignIn" component={SignIn} />
           <AuthStack.Screen name="SignUp" component={SignUp} />
           <AuthStack.Screen name="Main" component={SharedElementNavigation} />
-        </AuthStack.Navigator> ) :
-        (<SharedElementNavigation />
+        </AuthStack.Navigator>
+      ) : (
+        <SharedElementNavigation />
       )}
     </NavigationContainer>
   );

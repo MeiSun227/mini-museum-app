@@ -7,12 +7,12 @@ import {
   StyleSheet,
   Dimensions,
   Button,
-  Alert,
+  TouchableOpacity,
 } from "react-native";
 
 const { width, height } = Dimensions.get("screen");
 
-const bgc = ["#BDD1C5", "#D4A29C", "#608FB7"];
+const bgc = ["midnightblue", "goldenrod", "yellowgreen"];
 const labelData = [
   {
     key: "351",
@@ -117,25 +117,26 @@ const Square = ({ scrollX }) => {
   );
   const rotate = WaveEffect.interpolate({
     inputRange: [0, 0.5, 1],
-    outputRange: ["35deg", "0deg", "35deg"],
+    outputRange: ["65deg", "0deg", "65deg"],
   });
   return (
     <Animated.View
       style={{
         height: height,
         width: height,
-        borderRadius: 85,
+        borderRadius: 45,
         position: "absolute",
         backgroundColor: "#fff",
-        top: -height * 0.7,
-        left: -height * 0.3,
+        top: -height * 0.5,
+        left: -height * 0.6,
         transform: [
           {
             rotate,
           },
         ],
       }}
-    />
+    >
+</Animated.View>
   );
 };
 
@@ -149,7 +150,7 @@ const OnBoardingScreen = ({ navigation }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 100 }}
-        scrollEventThrottle={32}
+        scrollEventThrottle={48}
         pagingEnabled
         onScroll={Animated.event(
           [
@@ -168,8 +169,8 @@ const OnBoardingScreen = ({ navigation }) => {
         renderItem={({ item }) => {
           return (
             <View style={{ width, alignItems: "center" }}>
-              <View style={{ flex: 0.7, justifyContent: "center" }}>
-                <Image source={{ uri: item.image }} style={styles.image} />
+              <View style={{ flex: 0.78, justifyContent: "center"}}>
+                <Text style={{fontSize:36,fontWeight:"600",fontFamily: "Cochin"}}>Mini</Text>
               </View>
               <View style={{ flex: 0.3 }}>
                 <Text
@@ -193,24 +194,22 @@ const OnBoardingScreen = ({ navigation }) => {
         }}
       />
       <View
-        style={{
-          flexDirection: "row",
-          backgroundColor: "white",
-          borderRadius: 10,
+        style={{ marginVertical: 8,
         }}
       >
         <Button
-          title="SignIn"
+          title="Sign In"
           onPress={() => {
             navigation.navigate("SignIn");
           }}
         />
-        <Button
-          title="Not a users yet?"
+        <TouchableOpacity
           onPress={() => {
             navigation.navigate("SignUp");
           }}
-        />
+        >
+          <Text style={{color:'white'}}>Not a users yet?</Text>
+        </TouchableOpacity>
       </View>
       <Indicator scrollX={scrollX} />
     </View>

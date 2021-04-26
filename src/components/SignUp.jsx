@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import db from "../database/Firebase";
 import "firebase/firestore";
+import { Input } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const SignUp = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -23,31 +25,34 @@ const SignUp = ({ navigation }) => {
           name,
           email,
         });
-        console.log(uid);
         navigation.navigate("Main");
       })
       .catch((error) => console.log(error));
   };
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.inputStyle}
-        placeholder="name"
+      <View style={styles.textContainer}>
+        <Text style={styles.headingText}>Welcome to Mini Museum App</Text>
+      </View>
+      <Input
+        placeholder="username"
         value={name}
         onChangeText={setName}
+        leftIcon={<Icon name="user" size={16} color="grey" />}
       />
-      <TextInput
-        style={styles.inputStyle}
+      <Input
         placeholder="email"
         value={email}
         onChangeText={setEmail}
+        leftIcon={<Icon name="envelope" size={16} color="grey" />}
       />
-      <TextInput
-        style={styles.inputStyle}
+      <Input
         placeholder="password"
         value={password}
         onChangeText={setPassword}
+        leftIcon={<Icon name="lock" size={16} color="grey" />}
       />
+
       <TouchableOpacity style={styles.button} onPress={handleRegisterUser}>
         <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
@@ -62,15 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     padding: 35,
-    backgroundColor: "#fff",
-  },
-  inputStyle: {
-    width: "100%",
-    marginBottom: 15,
-    paddingBottom: 15,
-    alignSelf: "center",
-    borderColor: "#ccc",
-    borderBottomWidth: 1,
+    backgroundColor: "#3b444b",
   },
   button: {
     marginTop: 30,
@@ -90,6 +87,17 @@ const styles = StyleSheet.create({
   },
   buttonSignup: {
     fontSize: 12,
+  },
+  headingText: {
+    fontSize: 40,
+    color: "#fff",
+    fontWeight: "300",
+    fontStyle: "italic",
+  },
+  textContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: 100,
   },
 });
 export default SignUp;

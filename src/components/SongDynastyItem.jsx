@@ -8,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import useEgyptianArtApi from "../hooks/useEgyptianArtApi";
+import useSongDynastyApi from "../hooks/useSongDynastyApi";
 import { SharedElement } from "react-navigation-shared-element";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -16,8 +16,8 @@ const { height, width } = Dimensions.get("screen");
 const ITEM_WIDTH = width * 0.8;
 const ITEM_HEIGHT = height * 0.5;
 
-const EgyptianArtItem = ({ navigation }) => {
-  const { artObjects } = useEgyptianArtApi();
+const SongDynastyItem = ({ navigation }) => {
+  const { artObjects } = useSongDynastyApi();
 
   const art = artObjects ? artObjects.map((artObj) => artObj) : [];
 
@@ -31,7 +31,7 @@ const EgyptianArtItem = ({ navigation }) => {
         onPress={navigation.goBack}
       />
       <View style={{ padding: 10 }}>
-        <Text style={styles.textHeader}>Egyptian Art</Text>
+        <Text style={styles.textHeader}>Song Dynasty Art</Text>
       </View>
 
       <FlatList
@@ -140,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EgyptianArtItem;
+export default SongDynastyItem;

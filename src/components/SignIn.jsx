@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
 import db from "../database/Firebase";
+import { Input } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -19,25 +15,40 @@ const SignIn = ({ navigation }) => {
       .then((userCredential) => {
         navigation.navigate("Main");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => Alert.alert(error));
   };
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.inputStyle}
-        placeholder="email"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.inputStyle}
-        placeholder="password"
-        value={password}
-        onChangeText={setPassword}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLoginUser}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+      <View style={styles.logoContainer}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "600",
+            fontFamily: "Cochin",
+            color: "white",
+          }}
+        >
+          Mini
+        </Text>
+      </View>
+      <View style={styles.textContainer}>
+                  <Input
+                    placeholder="email"
+                    value={email}
+                    onChangeText={setEmail}
+                    leftIcon={<Icon name="user" size={16} color="grey" />}
+                  />
+                  <Input
+                    placeholder="password"
+                    value={password}
+                    onChangeText={setPassword}
+                    leftIcon={<Icon name="lock" size={16} color="grey" />}
+                  />
+
+                  <TouchableOpacity style={styles.button} onPress={handleLoginUser}>
+                    <Text style={styles.buttonText}>Login</Text>
+                  </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -46,26 +57,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     padding: 35,
-    backgroundColor: "#fff",
-  },
-  inputStyle: {
-    width: "100%",
-    marginBottom: 15,
-    paddingBottom: 15,
-    alignSelf: "center",
-    borderColor: "#ccc",
-    borderBottomWidth: 1,
+    backgroundColor: "#3b444b",
   },
   button: {
     marginTop: 30,
     marginBottom: 20,
     paddingVertical: 5,
     alignItems: "center",
-    backgroundColor: "#FFA611",
-    borderColor: "#FFA611",
+    backgroundColor: "midnightblue",
+    borderColor: "#fff",
+    justifyContent: "center",
     borderWidth: 1,
     borderRadius: 5,
     width: 200,
@@ -77,6 +80,20 @@ const styles = StyleSheet.create({
   },
   buttonSignup: {
     fontSize: 12,
+  },
+  headingText: {
+    fontSize: 40,
+    color: "#fff",
+    fontWeight: "300",
+    fontStyle: "italic",
+  },
+  textContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  logoContainer: {
+    paddingBottom: 120,
   },
 });
 export default SignIn;
