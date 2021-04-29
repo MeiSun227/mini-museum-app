@@ -1,11 +1,9 @@
 import React from "react";
 import AuthNavigation from "./src/navigator/AuthNavigation";
 
+
 const App = () => {
-  
-return <AuthNavigation />;
+  return <AuthNavigation />;
 };
-
-
 
 export default App;

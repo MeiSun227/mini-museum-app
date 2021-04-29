@@ -51,7 +51,7 @@ const EgyptianArtItem = ({ navigation }) => {
                 style={styles.border}
               >
                 <SharedElement
-                  id={`item.${item.key}.photo`}
+                  id={`item.${item.key}.primaryImage`}
                   style={[StyleSheet.absoluteFillObject]}
                 >
                   <View
@@ -71,11 +71,7 @@ const EgyptianArtItem = ({ navigation }) => {
               <Text style={styles.textSmall}>
                 {item.objectDate} {item.dynasty}
               </Text>
-              <Text style={styles.textSmall}>{item.region}</Text>
               <Text style={styles.textSmall}>{item.dimensions}</Text>
-              <View>
-                <AntDesign name="like2" size={24} color="white" />
-              </View>
             </View>
           );
         }}
@@ -100,6 +96,7 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     overflow: "hidden",
     borderRadius: 5,
+    marginBottom: 30,
   },
   carousel: {
     borderRadius: 16,
@@ -123,19 +120,17 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 24,
     textAlign: "center",
-    padding: 8,
-    margin: 8,
   },
   textSmall: {
     fontWeight: "100",
     color: "#fff",
-    fontSize: 12,
+    fontSize: 16,
     textAlign: "center",
   },
   textHeader: {
     fontWeight: "200",
     color: "#fff",
-    fontSize: 40,
+    fontSize: 36,
     textAlign: "center",
   },
 });

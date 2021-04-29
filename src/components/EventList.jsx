@@ -94,13 +94,13 @@ const styles = StyleSheet.create({
   textHeader: {
     fontWeight: "500",
     color: "#fff",
-    fontSize: 40,
+    fontSize: 36,
     textAlign: "center",
   },
   textBody: {
     fontWeight: "500",
     color: "#fff",
-    fontSize: 20,
+    fontSize: 18,
     textAlign: "center",
     bottom: 80,
   },

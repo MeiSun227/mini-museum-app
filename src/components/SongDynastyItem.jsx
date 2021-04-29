@@ -31,17 +31,16 @@ const SongDynastyItem = ({ navigation }) => {
         onPress={navigation.goBack}
       />
       <View style={{ padding: 10 }}>
-        <Text style={styles.textHeader}>Song Dynasty Art</Text>
+        <Text style={styles.textHeader}>Song Dynasty</Text>
       </View>
 
       <FlatList
         data={art}
-        keyExtractor={(item) => item.objectID}
+        keyExtractor={(item) => item.objectID.toString()}
         horizontal
-        inverted
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item, index }) => {
+        renderItem={({ item }) => {
           return (
             <View style={styles.itemContainer}>
               <TouchableOpacity
@@ -51,7 +50,7 @@ const SongDynastyItem = ({ navigation }) => {
                 style={styles.border}
               >
                 <SharedElement
-                  id={`item.${item.key}.photo`}
+                  id={`item.${item.key}.primaryImage`}
                   style={[StyleSheet.absoluteFillObject]}
                 >
                   <View
@@ -67,14 +66,14 @@ const SongDynastyItem = ({ navigation }) => {
                   </View>
                 </SharedElement>
               </TouchableOpacity>
-              <Text style={styles.textFont}>{item.title}</Text>
-              <Text style={styles.textSmall}>
-                {item.objectDate} {item.dynasty}
-              </Text>
-              <Text style={styles.textSmall}>{item.region}</Text>
-              <Text style={styles.textSmall}>{item.dimensions}</Text>
-              <View>
-                <AntDesign name="like2" size={24} color="white" />
+              <View
+                style={{ flex: 1, alignItem: "center",justifyContent:'flex-start', marginHorizontal: width.padding }}
+              >
+                <Text style={styles.textFont}>{item.title}</Text>
+                <Text style={styles.textSmall}>
+                  {item.objectDate} {item.dynasty}
+                </Text>
+                <Text style={styles.textSmall}>{item.dimensions}</Text>
               </View>
             </View>
           );
@@ -89,6 +88,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: width,
+    padding:20
   },
   image: {
     width: ITEM_WIDTH,
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     overflow: "hidden",
     borderRadius: 5,
+    marginBottom: 35,
   },
   carousel: {
     borderRadius: 16,
@@ -123,19 +124,17 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 24,
     textAlign: "center",
-    padding: 8,
-    margin: 8,
   },
   textSmall: {
     fontWeight: "100",
     color: "#fff",
-    fontSize: 12,
+    fontSize: 16,
     textAlign: "center",
   },
   textHeader: {
     fontWeight: "200",
     color: "#fff",
-    fontSize: 40,
+    fontSize: 36,
     textAlign: "center",
   },
 });
