@@ -36,9 +36,8 @@ const EgyptianArtItem = ({ navigation }) => {
 
       <FlatList
         data={art}
-        keyExtractor={(item) => item.objectID}
+        keyExtractor={(item) => item.objectID.toString()}
         horizontal
-        inverted
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         renderItem={({ item, index }) => {
@@ -67,11 +66,20 @@ const EgyptianArtItem = ({ navigation }) => {
                   </View>
                 </SharedElement>
               </TouchableOpacity>
-              <Text style={styles.textFont}>{item.title}</Text>
-              <Text style={styles.textSmall}>
-                {item.objectDate} {item.dynasty}
-              </Text>
-              <Text style={styles.textSmall}>{item.dimensions}</Text>
+              <View
+                style={{
+                  flex: 1,
+                  alignItem: "center",
+                  justifyContent: "flex-start",
+                  marginHorizontal: width.padding,
+                }}
+              >
+                <Text style={styles.textFont}>{item.title}</Text>
+                <Text style={styles.textSmall}>
+                  {item.objectDate} {item.dynasty}
+                </Text>
+                <Text style={styles.textSmall}>{item.dimensions}</Text>
+              </View>
             </View>
           );
         }}
@@ -85,6 +93,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: width,
+    padding: 20,
   },
   image: {
     width: ITEM_WIDTH,
@@ -96,7 +105,7 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     overflow: "hidden",
     borderRadius: 5,
-    marginBottom: 30,
+    marginBottom: 35,
   },
   carousel: {
     borderRadius: 16,

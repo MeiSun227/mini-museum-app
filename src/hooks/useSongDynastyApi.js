@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 const useSongDynastyApi = () => {
   const [artObjects, setArtObjects] = useState([]);
   const [loading, setLoading] = useState(false);
+
   // fetch objectid and then get all the picture
   const fetchArtObjectId = async () => {
     setLoading(true);
     const responseData = await fetch(
-      "https://collectionapi.metmuseum.org/public/collection/v1/search?geoLocation=China&dateBegin=965&dateEnd=1279&q=chinese"
+      "https://collectionapi.metmuseum.org/public/collection/v1/search?geoLocation=China&dateBegin=965&dateEnd=1270&q=chinese"
     );
     const objectIDsJson = await responseData.json();
     const newArtObjects = await Promise.all(

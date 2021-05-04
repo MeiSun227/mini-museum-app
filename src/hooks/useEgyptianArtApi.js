@@ -7,7 +7,7 @@ const useEgyptianArtApi = () => {
   const fetchArtObjectId = async () => {
     setLoading(true);
     const responseData = await fetch(
-      "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&q=egyptian"
+      "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&geoLocation=Egypt&dateBegin=-2000&dateEnd=1000&q=egyptian"
     );
     const objectIDsJson = await responseData.json();
     const newArtObjects = await Promise.all(
