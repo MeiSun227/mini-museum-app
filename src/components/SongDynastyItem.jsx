@@ -8,6 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
   TouchableHighlightBase,
+  Alert,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import useSongDynastyApi from "../hooks/useSongDynastyApi";
@@ -17,6 +18,7 @@ import { AntDesign } from "@expo/vector-icons";
 const { height, width } = Dimensions.get("screen");
 const ITEM_WIDTH = width * 0.8;
 const ITEM_HEIGHT = height * 0.5;
+
 
 const SongDynastyItem = ({ navigation }) => {
   const { artObjects } = useSongDynastyApi();
@@ -30,13 +32,15 @@ const SongDynastyItem = ({ navigation }) => {
   const handleSearch = (text) => {
     if (text) {
       const newData = art.filter((item) => {
-        const itemData = item.objectName ? item.objectName.toUpperCase() : ''.toUpperCase();
+        const itemData = item.objectName
+          ? item.objectName.toUpperCase()
+          : "".toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
-      setSearchText(text)
-      setFilterData(newData)
-      setSearch(true)
+      setSearchText(text);
+      setFilterData(newData);
+      setSearch(true);
     } else {
       setSearchText(text)
       setFilterData(art)
@@ -98,33 +102,36 @@ const SongDynastyItem = ({ navigation }) => {
         style={{ top: 30, left: 10, zIndex: 2 }}
         onPress={navigation.goBack}
       />
-      <View style={{ padding: 10 }}>
-      </View>
-      <View style={{ padding: 10 }}>
+      <View style={{ padding: 10 }}></View>
+      <View style={{ padding: 5 }}>
         <Text style={styles.textHeader}>Song Dynasty</Text>
       </View>
       <View>
-      <SearchBar
-       onChangeText={handleSearch}
-        value={searchText} 
-        placeholder="Type Here..."/>
+        <SearchBar
+          onChangeText={handleSearch}
+          value={searchText}
+          placeholder="Type Here..."
+        />
       </View>
-      {search? ( <FlatList
-        data={filterData}
-        keyExtractor={(item) => item.objectID.toString()}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        renderItem={ItemView}
-      />):(
-      <FlatList
-        data={art}
-        keyExtractor={(item) => item.objectID.toString()}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        renderItem={ItemView}
-      />)}
+      {search ? (
+        <FlatList
+          data={filterData}
+          keyExtractor={(item) => item.objectID.toString()}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          renderItem={ItemView}
+        />
+      ) : (
+        <FlatList
+          data={art}
+          keyExtractor={(item) => item.objectID.toString()}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          renderItem={ItemView}
+        />
+      )}
     </View>
   );
 };
@@ -146,7 +153,7 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     overflow: "hidden",
     borderRadius: 5,
-    marginBottom: 35,
+    marginBottom: 30,
   },
   carousel: {
     borderRadius: 16,
@@ -168,13 +175,13 @@ const styles = StyleSheet.create({
   textFont: {
     fontWeight: "100",
     color: "#fff",
-    fontSize: 24,
+    fontSize: 22,
     textAlign: "center",
   },
   textSmall: {
     fontWeight: "100",
     color: "#fff",
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "center",
   },
   textHeader: {

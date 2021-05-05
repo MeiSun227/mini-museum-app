@@ -5,12 +5,12 @@ import {
   Image,
   SafeAreaView,
   Text,
-  Pressable,
-  TouchableHighlight,
-  TouchableOpacityBase,
+  Share,
 } from "react-native";
 import { SharedElement } from "react-navigation-shared-element";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
+
+
 
 const ArtDetail = ({ route, navigation }) => {
   const [heart, setHeart] = useState(false);
@@ -18,6 +18,16 @@ const ArtDetail = ({ route, navigation }) => {
 
   const handleHeart = () => {
     setHeart(true);
+  };
+
+  //share image uri to social app
+  const onShare = () => {
+    const uri = item.primaryImageSmall;
+    const title = item.title;
+    const result = Share.share({
+      message: title,
+      url: uri,
+    });
   };
 
   return (
@@ -81,7 +91,12 @@ const ArtDetail = ({ route, navigation }) => {
               <FontAwesome name="commenting-o" size={22} color="white" />
             </View>
             <View style={{ flexDirection: "row", padding: 8 }}>
-              <FontAwesome name="share" size={22} color="white" />
+              <FontAwesome
+                name="share"
+                size={22}
+                color="white"
+                onPress={onShare}
+              />
             </View>
           </View>
         </View>

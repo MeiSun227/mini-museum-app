@@ -7,10 +7,11 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Share,
 } from "react-native";
 import useEgyptianArtApi from "../hooks/useEgyptianArtApi";
 import { SharedElement } from "react-navigation-shared-element";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 
 const { height, width } = Dimensions.get("screen");
 const ITEM_WIDTH = width * 0.8;
@@ -20,7 +21,7 @@ const EgyptianArtItem = ({ navigation }) => {
   const { artObjects } = useEgyptianArtApi();
 
   const art = artObjects ? artObjects.map((artObj) => artObj) : [];
-
+ 
   return (
     <View style={styles.container}>
       <AntDesign
@@ -33,7 +34,7 @@ const EgyptianArtItem = ({ navigation }) => {
       <View style={{ padding: 10 }}>
         <Text style={styles.textHeader}>Egyptian Art</Text>
       </View>
-
+  
       <FlatList
         data={art}
         keyExtractor={(item) => item.objectID.toString()}
