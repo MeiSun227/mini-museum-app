@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -7,21 +7,87 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  Share,
 } from "react-native";
 import useEgyptianArtApi from "../hooks/useEgyptianArtApi";
+import { SearchBar } from "react-native-elements";
 import { SharedElement } from "react-navigation-shared-element";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
+// styling
 const { height, width } = Dimensions.get("screen");
 const ITEM_WIDTH = width * 0.8;
 const ITEM_HEIGHT = height * 0.5;
 
 const EgyptianArtItem = ({ navigation }) => {
   const { artObjects } = useEgyptianArtApi();
-
+  const [searchText, setSearchText] = useState("");
+  const [filterData, setFilterData] = useState([]);
+  const [search, setSearch] = useState(false);
   const art = artObjects ? artObjects.map((artObj) => artObj) : [];
- 
+
+  //search function
+  const handleSearch = (text) => {
+    if (text) {
+      const newData = art.filter((item) => {
+        const itemData = item.objectName
+          ? item.objectName.toUpperCase()
+          : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setSearchText(text);
+      setFilterData(newData);
+      setSearch(true);
+    } else {
+      setSearchText(text);
+      setFilterData(art);
+      setSearch(false);
+    }
+  };
+  const ItemView = ({ item }) => {
+    return (
+      <View style={styles.itemContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Detail", { item });
+          }}
+          style={styles.border}
+        >
+          <SharedElement
+            id={`item.${item.key}.primaryImage`}
+            style={[StyleSheet.absoluteFillObject]}
+          >
+            <View
+              style={[
+                StyleSheet.absoluteFillObject,
+                { overflow: "hidden", borderRadius: 2 },
+              ]}
+            >
+              <Image
+                style={[StyleSheet.absoluteFillObject, styles.carousel]}
+                source={{ uri: item.primaryImage }}
+              />
+            </View>
+          </SharedElement>
+        </TouchableOpacity>
+        <View
+          style={{
+            flex: 1,
+            alignItem: "center",
+            justifyContent: "flex-start",
+            marginHorizontal: width.padding,
+          }}
+        >
+          <Text style={styles.textFont}>{item.title}</Text>
+          <Text style={styles.textSmall}>
+            {item.objectDate} {item.dynasty}
+          </Text>
+          <Text style={styles.textSmall}>{item.dimensions}</Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <AntDesign
@@ -34,57 +100,32 @@ const EgyptianArtItem = ({ navigation }) => {
       <View style={{ padding: 10 }}>
         <Text style={styles.textHeader}>Egyptian Art</Text>
       </View>
-  
-      <FlatList
-        data={art}
-        keyExtractor={(item) => item.objectID.toString()}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item, index }) => {
-          return (
-            <View style={styles.itemContainer}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.push("Detail", { item });
-                }}
-                style={styles.border}
-              >
-                <SharedElement
-                  id={`item.${item.key}.primaryImage`}
-                  style={[StyleSheet.absoluteFillObject]}
-                >
-                  <View
-                    style={[
-                      StyleSheet.absoluteFillObject,
-                      { overflow: "hidden", borderRadius: 2 },
-                    ]}
-                  >
-                    <Image
-                      style={[StyleSheet.absoluteFillObject, styles.carousel]}
-                      source={{ uri: item.primaryImage }}
-                    />
-                  </View>
-                </SharedElement>
-              </TouchableOpacity>
-              <View
-                style={{
-                  flex: 1,
-                  alignItem: "center",
-                  justifyContent: "flex-start",
-                  marginHorizontal: width.padding,
-                }}
-              >
-                <Text style={styles.textFont}>{item.title}</Text>
-                <Text style={styles.textSmall}>
-                  {item.objectDate} {item.dynasty}
-                </Text>
-                <Text style={styles.textSmall}>{item.dimensions}</Text>
-              </View>
-            </View>
-          );
-        }}
-      />
+      <View>
+        <SearchBar
+          onChangeText={handleSearch}
+          value={searchText}
+          placeholder="Type Here..."
+        />
+      </View>
+      {search ? (
+        <FlatList
+          data={filterData}
+          keyExtractor={(item) => item.objectID.toString()}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          renderItem={ItemView}
+        />
+      ) : (
+        <FlatList
+          data={art}
+          keyExtractor={(item) => item.objectID.toString()}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          renderItem={ItemView}
+        />
+      )}
     </View>
   );
 };
@@ -128,13 +169,13 @@ const styles = StyleSheet.create({
   textFont: {
     fontWeight: "100",
     color: "#fff",
-    fontSize: 24,
+    fontSize: 20,
     textAlign: "center",
   },
   textSmall: {
     fontWeight: "100",
     color: "#fff",
-    fontSize: 16,
+    fontSize: 11,
     textAlign: "center",
   },
   textHeader: {
