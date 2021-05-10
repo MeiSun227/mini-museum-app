@@ -5,7 +5,7 @@ The app navigation is using react navigation handle the route and navigate/ redi
 This app is using open Api from The Metropolitan Museum of Art Collection API(https://metmuseum.github.io), there are no pagnition available in the ApI, loading the data will take sometimes
 By using the React's useState hook to maintain two different gallery list state and the useEffect hook to call the fetchtheir own API.
 This project will continue develop with test can build CI/CD github action.
-![Boarding](images/onBoarding.png)
-![SignUp](images/SignUp_Screen.png)
-![Art List ](images/ArtList.png)
-![Art Detail ](images/ArtDetail.png)
+![Boarding](src/images/onBoarding.png)
+![SignUp](src/images/SignUp_Screen.png)
+![Art List](src/images/ArtList.png)
+![Art Detail](src/images/ArtDetail.png)
