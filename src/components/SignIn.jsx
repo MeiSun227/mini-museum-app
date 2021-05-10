@@ -4,18 +4,19 @@ import db from "../database/Firebase";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const SignIn = ({ navigation }) => {
+const SignIn = ({ navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // new User register by firebase
-  const handleLoginUser = () => {
-    db.auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        navigation.navigate("Main");
-      })
-      .catch((error) => Alert.alert(error));
+  const handleLoginUser = async () => {
+    await db
+       .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          navigation.navigate("Main");
+        })
+        .catch((error) => console.log(error));
   };
   return (
     <View style={styles.container}>
@@ -32,22 +33,29 @@ const SignIn = ({ navigation }) => {
         </Text>
       </View>
       <View style={styles.textContainer}>
-                  <Input
-                    placeholder="email"
-                    value={email}
-                    onChangeText={setEmail}
-                    leftIcon={<Icon name="user" size={16} color="grey" />}
-                  />
-                  <Input
-                    placeholder="password"
-                    value={password}
-                    onChangeText={setPassword}
-                    leftIcon={<Icon name="lock" size={16} color="grey" />}
-                  />
+        <Input
+          placeholder="email"
+          value={email}
+          onChangeText={setEmail}
+          testID="emailField"
+          leftIcon={<Icon name="user" size={16} color="grey" />}
+        />
+        <Input
+          placeholder="password"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
+          testID="passwordField"
+          leftIcon={<Icon name="lock" size={16} color="grey" />}
+        />
 
-                  <TouchableOpacity style={styles.button} onPress={handleLoginUser}>
-                    <Text style={styles.buttonText}>Login</Text>
-                  </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleLoginUser}
+          testID="submitButton"
+        >
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

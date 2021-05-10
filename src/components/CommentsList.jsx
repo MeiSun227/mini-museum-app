@@ -8,8 +8,7 @@ import {
   Button,
 } from "react-native";
 
-import db from "../database/Firebase";
-import "firebase/firestore";
+
 
 
 const CommentsList = () => {

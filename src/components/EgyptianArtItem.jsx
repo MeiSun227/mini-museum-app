@@ -18,6 +18,7 @@ const { height, width } = Dimensions.get("screen");
 const ITEM_WIDTH = width * 0.8;
 const ITEM_HEIGHT = height * 0.5;
 
+
 const EgyptianArtItem = ({ navigation }) => {
   const { artObjects } = useEgyptianArtApi();
   const [searchText, setSearchText] = useState("");
