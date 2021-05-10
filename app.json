@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "min-museum-app",
-    "slug": "min-museum-app",
+    "name": "mini-museum-app",
+    "slug": "mini-museum-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "This app is for study purpose and practive using react native element and core components from react native ",
+    "githubUrl": "https://github.com/MeiSun227/mini-museum-app"
   }
 }

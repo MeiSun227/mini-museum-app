@@ -7,76 +7,104 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Image } from "react-native-elements";
+import { AntDesign } from "@expo/vector-icons";
+import db from "../database/Firebase";
 
 const { height, width } = Dimensions.get("screen");
 const ITEM_WIDTH = width * 0.91;
 const ITEM_HEIGHT = height * 0.2;
 
 const EventList = ({ navigation }) => {
+  const handleLogoutUser = () => {
+    db.auth()
+      .signOut()
+      .then(() => {
+        navigation.navagate("SignIn");
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <View style={styles.container}>
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: "600",
-          fontFamily: "Cochin",
-          color: "white",
-          textAlign: "left",
-        }}
-      >
-        Mini
-      </Text>
-      <Text style={styles.textHeader}> Art collections </Text>
-      <View style={{ margin: 12, padding: 5 }}>
-        <View style={styles.border}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("EgyptianCollection");
-            }}
-          >
-            <View style={styles.carousel}>
-              <Image
-                source={require("../images/header-19.jpg")}
-                style={styles.image}
-              />
-              <Text style={styles.textBody}>Egyptian Art Collection</Text>
-            </View>
-          </TouchableOpacity>
+      <View style={{ flex: 0.7, flexDirection: "row" }}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "600",
+            fontFamily: "Cochin",
+            color: "white",
+            textAlign: "left",
+          }}
+        >
+          Mini
+        </Text>
+        <View style={{  paddingBottom: 8 ,justifyContent:"center",marginHorizontal:8,marginTop:30}}>
+          <Text style={styles.textHeader}> Art collections </Text>
         </View>
-        <View style={styles.border}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("SongCollection");
-            }}
-          >
-            <View style={styles.carousel}>
-              <Image
-                source={require("../images/899.jpg")}
-                style={styles.image}
-              />
-              <Text style={styles.textBody}>
-                Chinese-Song Dynasty Collection
-              </Text>
-            </View>
-          </TouchableOpacity>
+        <View
+          style={{
+    padding:5
+          }}
+        >
+          <AntDesign
+            name="logout"
+            size={24}
+            color="white"
+            onPress={handleLogoutUser}
+          />
         </View>
-        <View style={styles.border}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("SongCollection");
-            }}
-          >
-            <View style={styles.carousel}>
-              <Image
-                source={{
-                  uri:
-                    "https://images.metmuseum.org/CRDImages/as/original/DT240.jpg",
-                }}
-                style={styles.image}
-              />
-              <Text style={styles.textBody}>India Art Collection</Text>
-            </View>
-          </TouchableOpacity>
+      </View>
+      <View style={{  alignContent:"center" ,marginBottom:50 }}>
+        <View style={{ margin: 10, padding: 5 }}>
+          <View style={styles.border}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("EgyptianCollection");
+              }}
+            >
+              <View style={styles.carousel}>
+                <Image
+                  source={require("../images/header-19.jpg")}
+                  style={styles.image}
+                />
+                <Text style={styles.textBody}>Egyptian Art Collection</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.border}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("SongCollection");
+              }}
+            >
+              <View style={styles.carousel}>
+                <Image
+                  source={require("../images/899.jpg")}
+                  style={styles.image}
+                />
+                <Text style={styles.textBody}>
+                  Chinese-Song Dynasty Collection
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.border}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("SongCollection");
+              }}
+            >
+              <View style={styles.carousel}>
+                <Image
+                  source={{
+                    uri:
+                      "https://images.metmuseum.org/CRDImages/as/original/DT240.jpg",
+                  }}
+                  style={styles.image}
+                />
+                <Text style={styles.textBody}>India Art Collection</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>

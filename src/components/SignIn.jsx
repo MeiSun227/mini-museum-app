@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import db from "../database/Firebase";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";

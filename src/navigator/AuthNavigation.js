@@ -16,9 +16,9 @@ const AuthNavigation = () => {
 
   db.auth().onAuthStateChanged((user) => {
     if (user) {
-      setLoading(true);
-    } else {
       setLoading(false);
+    } else {
+      setLoading(true);
     }
   });
 
